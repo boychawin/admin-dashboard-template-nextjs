@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { GlobalNav } from '@/components/global-nav'
+import { AddressBar } from '@/components/address-bar'
+import Byline from '@/components/byline'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +19,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <body className={`${inter.className} bg-gray-100 overflow-y-scroll  pb-36`}>
+      <GlobalNav />
+
+      <div className="lg:pl-72">
+        <div className="mx-auto max-w-4xl space-y-8 px-2 pt-20 lg:px-8 lg:py-8">
+          <div className="bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20">
+            <div className="rounded-lg bg-white">
+              <AddressBar />
+            </div>
+          </div>
+
+          <div className="bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20">
+            <div className="rounded-lg bg-white p-3.5 lg:p-6">{children}</div>
+          </div>
+          <Byline className="fixed sm:hidden" />
+        </div>
+      </div>
+    </body>
+  </html>
   )
 }
