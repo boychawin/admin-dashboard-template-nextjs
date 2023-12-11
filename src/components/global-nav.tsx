@@ -1,19 +1,19 @@
 'use client';
 
-import { demos, type Item } from '@/lib/demos';
+import { menus, type Item } from '@/lib/menu';
 import { NextLogo } from './next-logo';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import clsx from 'clsx';
 import { useState } from 'react';
-import Byline from './byline';
+import { AlignLeft, AlignRight } from 'lucide-react';
 
 export function GlobalNav() {
   const [isOpen, setIsOpen] = useState(false);
   const close = () => setIsOpen(false);
 
   return (
-    <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-72 lg:border-b-0 lg:border-r lg:border-gray-800">
+    <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-100 bg-white lg:bottom-0 lg:z-auto lg:w-72 lg:border-b-0 lg:border-r lg:border-gray-100">
       <div className="flex h-14 items-center px-4 py-4 lg:h-auto">
         <Link
           href="/"
@@ -24,9 +24,9 @@ export function GlobalNav() {
             <NextLogo />
           </div>
 
-          <h3 className="font-semibold tracking-wide text-gray-400 group-hover:text-gray-50">
-            App Router
-          </h3>
+          {/* <h3 className="font-semibold tracking-wide text-gray-400 group-hover:text-gray-50">
+            Name
+          </h3> */}
         </Link>
       </div>
       <button
@@ -34,27 +34,27 @@ export function GlobalNav() {
         className="group absolute right-0 top-0 flex h-14 items-center gap-x-2 px-4 lg:hidden"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="font-medium text-gray-100 group-hover:text-gray-400">
+        {/* <div className="font-medium text-gray-800 group-hover:text-gray-400">
           Menu
-        </div>
+        </div> */}
         {isOpen ? (
-          <div className="block w-6 text-gray-400" >1</div>
+          <AlignLeft className="block w-6 text-gray-400" />
         ) : (
-          <div className="block w-6 text-gray-400" >2</div>
+          <AlignRight className="block w-6 text-gray-400" />
         )}
       </button>
 
       <div
         className={clsx('overflow-y-auto lg:static lg:block', {
-          'fixed inset-x-0 bottom-0 top-14 mt-px bg-black': isOpen,
+          'fixed inset-x-0 bottom-0 top-14 mt-px bg-white': isOpen,
           hidden: !isOpen,
         })}
       >
         <nav className="space-y-6 px-2 pb-24 pt-5">
-          {demos.map((section) => {
+          {menus.map((section) => {
             return (
               <div key={section.name}>
-                <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
+                <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-500/80">
                   <div>{section.name}</div>
                 </div>
 
@@ -67,7 +67,6 @@ export function GlobalNav() {
             );
           })}
         </nav>
-        <Byline className="absolute hidden sm:block" />
       </div>
     </div>
   );
@@ -88,9 +87,9 @@ function GlobalNavItem({
       onClick={close}
       href={`/${item.slug}`}
       className={clsx(
-        'block rounded-md px-3 py-2 text-sm font-medium hover:text-gray-300',
+        'block rounded-md px-3 py-2 text-sm text-gray-800 font-medium hover:text-gray-800',
         {
-          'text-gray-400 hover:bg-gray-800': !isActive,
+          'text-gray-900  hover:bg-gray-300': !isActive,
           'text-white': isActive,
         },
       )}
